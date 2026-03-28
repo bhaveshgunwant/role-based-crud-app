@@ -478,7 +478,7 @@ function RegisterPage({ onLogin, onSwitch }) {
 
       <div className="field">
         <label>Full name</label>
-        <input placeholder="Ada Lovelace" value={name}
+        <input placeholder="James Bond" value={name}
           onChange={e => setName(e.target.value)}
           onKeyDown={e => e.key === "Enter" && register()} />
       </div>
