@@ -13,13 +13,14 @@ const generateToken = (userId) => {
 
 const registerUser = async (req, res) => {
   try {
-    const { name, email, password } = req.body;
+    const { name, email, password, adminKey } = req.body;
 
     if (!name || !email || !password) {
-        return res.status(400).json({
-          message: "All fields are required"
+      return res.status(400).json({
+        message: "All fields are required"
       });
     }
+
     const existingUser = await User.findOne({ email });
     if (existingUser) {
       return res.status(409).json({
@@ -27,16 +28,23 @@ const registerUser = async (req, res) => {
       });
     }
 
-    const user = await User.create({ name, email, password });
+    let role = "user";
+    if (adminKey && adminKey === process.env.ADMIN_SECRET) {
+      role = "admin";
+    }
+
+    const user = await User.create({ name, email, password, role });
 
     const token = generateToken(user._id);
 
     res.cookie("token", token, {
       httpOnly: true,
+      // secure: true,
       sameSite: "strict",
-      // secure: true 
       maxAge: 15 * 60 * 1000
     });
+
+    user.password = undefined;
 
     res.status(201).json({
       message: "User registered successfully",
