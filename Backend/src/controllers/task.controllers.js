@@ -20,5 +20,25 @@ const createTask = async (req, res) => {
   }
 };
 
+const getTasks = async (req, res) => {
+  try {
+    let tasks;
 
-export default {createTask};
+    if (req.user.role === "admin") {
+      tasks = await Task.find().populate("user", "name email");
+    } else {
+      tasks = await Task.find({ user: req.user._id });
+    }
+
+    res.status(200).json({
+      count: tasks.length,
+      tasks
+    });
+
+  } catch (error) {
+    res.status(500).json({ message: "Server error" });
+  }
+};
+
+
+export default {createTask,getTasks};
