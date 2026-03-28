@@ -49,7 +49,7 @@ const getTaskById = async (req, res) => {
         message: "Task not found"
       });
     }
-    
+
     if (
       req.user.role !== "admin" &&
       task.user.toString() !== req.user._id.toString()
@@ -66,5 +66,40 @@ const getTaskById = async (req, res) => {
   }
 };
 
+const updateTask = async (req, res) => {
+  try {
+    const task = await Task.findById(req.params.id);
 
-export default {createTask,getTasks,getTaskById};
+    if (!task) {
+      return res.status(404).json({
+        message: "Task not found"
+      });
+    }
+
+    if (
+      req.user.role !== "admin" &&
+      task.user.toString() !== req.user._id.toString()
+    ) {
+      return res.status(403).json({
+        message: "Not allowed"
+      });
+    }
+
+    const updatedTask = await Task.findByIdAndUpdate(
+      req.params.id,
+      req.body,
+      { returnDocument: "after" }
+    );
+
+    res.status(200).json({
+      message: "Task updated",
+      task: updatedTask
+    });
+
+  } catch (error) {
+    res.status(500).json({ message: "Server error" });
+  }
+};
+
+
+export default {createTask,getTasks,getTaskById,updateTask};
