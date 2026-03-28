@@ -50,10 +50,7 @@ const getTaskById = async (req, res) => {
       });
     }
 
-    if (
-      req.user.role !== "admin" &&
-      task.user.toString() !== req.user._id.toString()
-    ) {
+    if (req.user.role !== "admin" && task.user.toString() !== req.user._id.toString()) {
       return res.status(403).json({
         message: "Not allowed"
       });
@@ -76,10 +73,7 @@ const updateTask = async (req, res) => {
       });
     }
 
-    if (
-      req.user.role !== "admin" &&
-      task.user.toString() !== req.user._id.toString()
-    ) {
+    if (req.user.role !== "admin" && task.user.toString() !== req.user._id.toString()) {
       return res.status(403).json({
         message: "Not allowed"
       });
@@ -101,5 +95,32 @@ const updateTask = async (req, res) => {
   }
 };
 
+const deleteTask = async (req, res) => {
+  try {
+    const task = await Task.findById(req.params.id);
 
-export default {createTask,getTasks,getTaskById,updateTask};
+    if (!task) {
+      return res.status(404).json({
+        message: "Task not found"
+      });
+    }
+
+    if (req.user.role !== "admin" && task.user.toString() !== req.user._id.toString() ) {
+      return res.status(403).json({
+        message: "Not allowed"
+      });
+    }
+
+    await Task.findByIdAndDelete(req.params.id);
+
+    res.status(200).json({
+      message: "Task deleted"
+    });
+
+  } catch (error) {
+    res.status(500).json({ message: "Server error" });
+  }
+};
+
+
+export default {createTask,getTasks,getTaskById,updateTask,deleteTask};
