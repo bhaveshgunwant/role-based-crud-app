@@ -164,3 +164,22 @@ Postman Collection:
 - Uses HTTPS with secure cookie handling
 
 ---
+
+
+## Demo Credentials
+
+
+```
+Admin:
+
+email: admin@test.com  
+password: 123456  
+adminKey: i_am_admin  
+```
+
+```
+User:
+
+email: user@test.com  
+password: 123456
+```
