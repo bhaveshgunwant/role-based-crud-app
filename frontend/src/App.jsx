@@ -831,11 +831,34 @@ function Dashboard({ user, onLogout }) {
 //  ROOT
 
 export default function App() {
-  const [user, setUser] = useState(null);
-  const [page, setPage] = useState("login");
-
+  const [user, setUser]         = useState(null);
+  const [page, setPage]         = useState("login");
+  const [checking, setChecking] = useState(true);
+ 
+  // On every refresh, verify the httpOnly cookie with the backend.
+  // GET /auth/me uses the protect middleware to decode req.cookies.token.
+  useEffect(() => {
+    API.get("/auth/me")
+      .then(res => setUser(res.data.user))
+      .catch(() => { /* cookie missing or expired — stay on login */ })
+      .finally(() => setChecking(false));
+  }, []);
+ 
   const handleLogout = () => { setUser(null); setPage("login"); };
-
+ 
+  if (checking) {
+    return (
+      <>
+        <GlobalStyles />
+        <div className="app-shell">
+          <div style={{ fontFamily: "'DM Mono', monospace", fontSize: "12px", color: "var(--muted)", letterSpacing: "0.08em" }}>
+            ◌ &nbsp;restoring session…
+          </div>
+        </div>
+      </>
+    );
+  }
+ 
   return (
     <>
       <GlobalStyles />
@@ -851,3 +874,4 @@ export default function App() {
     </>
   );
 }
+ 

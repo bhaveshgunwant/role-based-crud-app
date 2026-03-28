@@ -108,4 +108,8 @@ export const logoutUser = (req, res) => {
   });
 };
 
-export default {registerUser, loginUser, logoutUser};
+const getMe = async (req, res) => {
+  res.status(200).json({ user: req.user });
+};
+
+export default {registerUser, loginUser, logoutUser,getMe};
