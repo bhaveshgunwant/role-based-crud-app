@@ -153,8 +153,7 @@ npm run dev
 ## API Documentation
 
 Postman Collection:
-
-`updating soon`
+`Backend/postman/postman_collection.json`
 
 ---
 

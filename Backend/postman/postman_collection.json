@@ -1,0 +1,325 @@
+{
+  "info": {
+    "_postman_id": "b2b71b57-ee29-4558-9faa-21daed4dcbc2",
+    "name": "Role Based Crud App",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "52726251",
+    "_collection_link": "https://go.postman.co/collection/52726251-b2b71b57-ee29-4558-9faa-21daed4dcbc2?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "register user",
+      "request": {
+        "auth": {
+          "type": "noauth"
+        },
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "// {\n//     \"name\":\"bhavesh\",\n//     \"email\": \"gunwantbhavesh100@gmail.com\",\n//     \"password\": \"bhaveshgunwant123\",\n//     \"adminKey\": \"i_am_admin\"\n// }\n\n{\n    \"name\":\"testuser1\",\n    \"email\": \"testuser1@gmail.com\",\n    \"password\": \"testuser123\"\n}\n",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{production}}auth/register",
+          "host": [
+            "{{production}}auth"
+          ],
+          "path": [
+            "register"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "login user",
+      "request": {
+        "auth": {
+          "type": "noauth"
+        },
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"email\": \"gunwantbhavesh100@gmail.com\",\n    \"password\": \"bhaveshgunwant123\"\n}\n\n// {\n//     \"email\": \"testuser1@gmail.com\",\n//     \"password\": \"testuser123\"\n// }\n",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{production}}auth/login",
+          "host": [
+            "{{production}}auth"
+          ],
+          "path": [
+            "login"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "logout user",
+      "request": {
+        "auth": {
+          "type": "noauth"
+        },
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "getUser",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": ""
+        },
+        "url": {
+          "raw": "{{production}}auth/logout",
+          "host": [
+            "{{production}}auth"
+          ],
+          "path": [
+            "logout"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "create task",
+      "request": {
+        "auth": {
+          "type": "noauth"
+        },
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "getUser",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "// {\n//     \"title\":\"Run 10km\",\n//     \"description\": \"let see what i can do\"\n// }\n\n{\n    \"title\":\"drink 10L\",\n    \"description\": \"let see how much i can drink\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{production}}tasks/",
+          "host": [
+            "{{production}}tasks"
+          ],
+          "path": [
+            ""
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "fetch task",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "auth": {
+          "type": "noauth"
+        },
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "getUser",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"title\":\"Hey\",\n    \"description\": \"check\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{production}}tasks/",
+          "host": [
+            "{{production}}tasks"
+          ],
+          "path": [
+            ""
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "get-me",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "auth": {
+          "type": "noauth"
+        },
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "getUser",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"title\":\"Hey\",\n    \"description\": \"check\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{production}}auth/me/",
+          "host": [
+            "{{production}}auth"
+          ],
+          "path": [
+            "me",
+            ""
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "fetch task by id",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "auth": {
+          "type": "noauth"
+        },
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "getUser",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{production}}tasks/69c7d2b14a4cdc6fd29a03b1",
+          "host": [
+            "{{production}}tasks"
+          ],
+          "path": [
+            "69c7d2b14a4cdc6fd29a03b1"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "update task",
+      "request": {
+        "auth": {
+          "type": "noauth"
+        },
+        "method": "PUT",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "getUser",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"title\" : \"drink 3L\",\n    \"description\": \"i can drink 3L\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{production}}tasks/69c7d2b14a4cdc6fd29a03b1",
+          "host": [
+            "{{production}}tasks"
+          ],
+          "path": [
+            "69c7d2b14a4cdc6fd29a03b1"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "delete task",
+      "request": {
+        "auth": {
+          "type": "noauth"
+        },
+        "method": "DELETE",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "getUser",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"title\" : \"drink 10L\",\n    \"description\": \"i can drink 10L\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{production}}tasks/69c7d2b14a4cdc6fd29a03b1",
+          "host": [
+            "{{production}}tasks"
+          ],
+          "path": [
+            "69c7d2b14a4cdc6fd29a03b1"
+          ]
+        }
+      },
+      "response": []
+    }
+  ],
+  "variable": [
+    {
+      "key": "production",
+      "value": ""
+    }
+  ]
+}
