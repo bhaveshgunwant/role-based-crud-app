@@ -5,6 +5,7 @@ import { protect } from "../middlewares/auth.middleware.js";
 
 const router = express.Router();
 
+// `/api/tasks/`
 router.post("/", protect, taskController.createTask);
 router.get("/", protect, taskController.getTasks);
 router.get("/:id", protect, taskController.getTaskById);
