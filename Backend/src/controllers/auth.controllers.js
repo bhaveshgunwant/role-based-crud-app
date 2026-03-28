@@ -70,6 +70,7 @@ const loginUser = async (req, res) => {
       maxAge: 15 * 60 * 1000
     });
 
+    user.password = undefined;
     res.status(200).json({
       message: "Login successful",
       user
