@@ -81,3 +81,21 @@ This project implements authentication, role-based access control, and full CRUD
 git clone <repo-link>
 cd backend
 npm install
+```
+
+### Create `.env` file
+
+```env
+PORT=3000
+MONGO_URI=your_mongodb_uri
+JWT_SECRET=your_secret
+ADMIN_SECRET=i_am_admin
+```
+
+### Run server
+
+```bash
+npm run dev
+```
+
+---
