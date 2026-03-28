@@ -17,7 +17,7 @@ app.use(cors({
 
 
 app.get("/", (req, res) => {
-  res.json({ message: "API is running..." });
+  res.json({ message: `API is running...  Refer to github: https://github.com/bhaveshgunwant/role-based-crud-app` });
 });
 
 
