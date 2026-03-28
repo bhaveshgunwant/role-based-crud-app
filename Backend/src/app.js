@@ -24,7 +24,7 @@ app.get("/", (req, res) => {
 });
 
 
-app.use("/api/auth", authRoutes);
-app.use("/api/tasks", taskRoutes);
+app.use("/api/v1/auth",  authRoutes);
+app.use("/api/v1/tasks", taskRoutes);
 
 export default app;
